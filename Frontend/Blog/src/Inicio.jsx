@@ -93,6 +93,9 @@ const Inicio = () => {
 
     // Manejar búsqueda dinámica
     useEffect(() => {
+
+        console.log('useEffect filtrado ejecutado:', { buscador, articulosLength: articulos.length, categoria: seleccionarCategoria, mostrandoBusquedaActual: mostrandoBusqueda });
+
         if (buscador.trim()) {
             // Filtrar artículos que coinciden con la búsqueda
             const resultados = articulos.filter(articulo =>
@@ -105,11 +108,43 @@ const Inicio = () => {
                 ))
             );
             setResultadosBusqueda(resultados);
+
+            console.log('Búsqueda activa, resultados:', resultados.length);
+
             setMostrandoBusqueda(true);
-        } else {
-            setResultadosBusqueda([]);
-            setMostrandoBusqueda(false);
+        } // else { 
+
+          //  console.log('Búsqueda vacía: restaurando filtroArticulos');
+
+          //  setResultadosBusqueda([]);
+         //   setMostrandoBusqueda(false);
             // Restaurar filtroArticulos al estado según categoría
+         //   if (seleccionarCategoria === 'Todas') {
+
+           //     console.log('Restaurando a Todas:', articulos.length);
+
+            //    setFiltroArticulos(articulos);
+           // } else {
+             //   const filtradosPorCategoria = articulos.filter(a => a.categoria === seleccionarCategoria);
+
+               // console.log('Restaurando a categoría:', filtradosPorCategoria.length);
+
+              //  setFiltroArticulos(filtradosPorCategoria);
+           // }
+       // }
+    }, [buscador, articulos, seleccionarCategoria]);
+
+    // Nuevo handler para onChange del input (reemplaza el onChange inline)
+    const handleBuscadorChange = (e) => {
+        const nuevoValor = e.target.value;
+        setBuscador(nuevoValor);
+
+
+        // Si se vacía, restaurar inmediatamente (síncrono en este ciclo)
+        if (!nuevoValor.trim()) {
+            console.log('Borrado completo: restaurando inmediatamente');
+            setMostrandoBusqueda(false);
+            setResultadosBusqueda([]);
             if (seleccionarCategoria === 'Todas') {
                 setFiltroArticulos(articulos);
             } else {
@@ -117,7 +152,7 @@ const Inicio = () => {
                 setFiltroArticulos(filtradosPorCategoria);
             }
         }
-    }, [buscador, articulos, seleccionarCategoria]);
+    };
 
     // Manejar cambio de categoría
     const handleCategoriaChange = (categoria) => {
@@ -168,7 +203,7 @@ const Inicio = () => {
                             className="buscador"
                             placeholder="Buscar artículos, tags, categorías..."
                             value={buscador}
-                            onChange={(e) => setBuscador(e.target.value)}
+                            onChange={handleBuscadorChange}  // <-- Nuevo handler, reemplaza a --> onChange={(e) => setBuscador(e.target.value)}
                             autoComplete="off"
                         />
                         {buscador && (
