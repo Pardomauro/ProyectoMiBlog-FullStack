@@ -112,33 +112,30 @@ const Inicio = () => {
             console.log('Búsqueda activa, resultados:', resultados.length);
 
             setMostrandoBusqueda(true);
-        } // else { 
+        }  /* else { 
 
-          //  console.log('Búsqueda vacía: restaurando filtroArticulos');
+        
+            setResultadosBusqueda([]);
+            setMostrandoBusqueda(false);
+            Restaurar filtroArticulos al estado según categoría
+            if (seleccionarCategoria === 'Todas') {
 
-          //  setResultadosBusqueda([]);
-         //   setMostrandoBusqueda(false);
-            // Restaurar filtroArticulos al estado según categoría
-         //   if (seleccionarCategoria === 'Todas') {
 
-           //     console.log('Restaurando a Todas:', articulos.length);
+                setFiltroArticulos(articulos);
+            } else {
+                const filtradosPorCategoria = articulos.filter(a => a.categoria === seleccionarCategoria);
 
-            //    setFiltroArticulos(articulos);
-           // } else {
-             //   const filtradosPorCategoria = articulos.filter(a => a.categoria === seleccionarCategoria);
-
-               // console.log('Restaurando a categoría:', filtradosPorCategoria.length);
-
-              //  setFiltroArticulos(filtradosPorCategoria);
-           // }
-       // }
+             
+                setFiltroArticulos(filtradosPorCategoria);
+            } 
+        } */
     }, [buscador, articulos, seleccionarCategoria]);
 
     // Nuevo handler para onChange del input (reemplaza el onChange inline)
     const handleBuscadorChange = (e) => {
         const nuevoValor = e.target.value;
         setBuscador(nuevoValor);
-
+ 
 
         // Si se vacía, restaurar inmediatamente (síncrono en este ciclo)
         if (!nuevoValor.trim()) {
