@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from './config/api';
 import './CrearArticulo.css';
 
 const CrearArticulo = () => {
@@ -27,7 +27,7 @@ const CrearArticulo = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/articulos/categorias');
+      const response = await fetch(getApiUrl('/api/articulos/categorias'));
       const data = await response.json();
       if (data.success) {
         setCategorias(data.categorias);
@@ -103,7 +103,7 @@ const CrearArticulo = () => {
         formDataToSend.append('imagen', imagen);
       }
 
-      const response = await fetch('http://localhost:5000/api/articulos', {
+      const response = await fetch(getApiUrl('/api/articulos'), {
         method: 'POST',
         body: formDataToSend
       });

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './contexts/AuthContext';
+import { getApiUrl, getImageUrl } from './config/api';
 
 const Inicio = () => {
     const [articulos, setArticulos] = useState([]);
@@ -56,11 +57,9 @@ const Inicio = () => {
 
     const fetchArticulos = async (categoria = null) => {
         try {
-            const url = categoria && categoria !== 'Todas'
-                ? `http://localhost:5000/api/articulos?categoria=${encodeURIComponent(categoria)}`
-                : 'http://localhost:5000/api/articulos';
-
-            const response = await fetch(url);
+            const url = categoria && categoria !== 'Todas' 
+                ? `${getApiUrl('/api/articulos')}?categoria=${encodeURIComponent(categoria)}`
+                : getApiUrl('/api/articulos');            const response = await fetch(url);
             const data = await response.json();
             if (data.success) {
                 setArticulos(data.articulos);
@@ -75,7 +74,7 @@ const Inicio = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/articulos/categorias');
+            const response = await fetch(getApiUrl('/api/articulos/categorias'));
             const data = await response.json();
             if (data.success) {
                 setCategorias(['Todas', ...data.categorias]);
@@ -227,7 +226,7 @@ const Inicio = () => {
                                             {articulo.imageUrl && (
                                                 <div className="search-result-image">
                                                     <img
-                                                        src={`http://localhost:5000${articulo.imageUrl}`}
+                                                        src={getImageUrl(articulo.imageUrl)}
                                                         alt={articulo.titulo}
                                                     />
                                                 </div>
@@ -318,7 +317,7 @@ const Inicio = () => {
                                             {articulo.imageUrl && (
                                                 <div className="article-image-container">
                                                     <img
-                                                        src={`http://localhost:5000${articulo.imageUrl}`}
+                                                        src={getImageUrl(articulo.imageUrl)}
                                                         alt={articulo.titulo}
                                                         className="article-image"
                                                         onError={(e) => {

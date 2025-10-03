@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getApiUrl, getImageUrl } from './config/api';
 import './LeerMas.css';
 
 const LeerMas = () => {
@@ -31,7 +32,7 @@ const LeerMas = () => {
   // Obtener el artículo específico
   const fetchArticulo = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/articulos/${id}`);
+      const response = await fetch(getApiUrl(`/api/articulos/${id}`));
       const data = await response.json();
       
       if (data.success) {
@@ -51,7 +52,7 @@ const LeerMas = () => {
   const fetchComentarios = async () => {
     try {
       setLoadingComentarios(true);
-      const response = await fetch(`http://localhost:5000/api/comentarios/${id}`);
+      const response = await fetch(getApiUrl(`/api/comentarios/${id}`));
       const data = await response.json();
       
       if (data.success) {
@@ -85,7 +86,7 @@ const LeerMas = () => {
     setEnviandoComentario(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/comentarios', {
+      const response = await fetch(getApiUrl('/api/comentarios'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -180,7 +181,7 @@ const LeerMas = () => {
         {articulo.imageUrl && (
           <div className="article-image-container">
             <img 
-              src={`http://localhost:5000${articulo.imageUrl}`} 
+              src={getImageUrl(articulo.imageUrl)} 
               alt={articulo.titulo}
               className="article-image"
             />
