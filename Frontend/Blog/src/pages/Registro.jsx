@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
-import './Registro.css';
+import { useAuth } from '../contexts/AuthContext';
+import '../styles/Registro.css';
 
 const Registro = () => {
   const navigate = useNavigate();

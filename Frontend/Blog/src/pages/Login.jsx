@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from './contexts/AuthContext';
-import './Login.css';
+import { useAuth } from '../contexts/AuthContext';
+import '../styles/Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');

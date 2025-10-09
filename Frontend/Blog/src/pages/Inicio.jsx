@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from './contexts/AuthContext';
-import { getApiUrl, getImageUrl } from './config/api';
+import { useAuth } from '../contexts/AuthContext';
+import { getApiUrl, getImageUrl } from '../config/api';
 
 const Inicio = () => {
     const [articulos, setArticulos] = useState([]);

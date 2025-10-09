@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getApiUrl } from './config/api';
-import './CrearArticulo.css';
+import { getApiUrl } from '../config/api';
+import '../styles/CrearArticulo.css';
 
 const CrearArticulo = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getApiUrl, getImageUrl } from './config/api';
-import './LeerMas.css';
+import { getApiUrl, getImageUrl } from '../config/api';
+import '../styles/LeerMas.css';
 
 const LeerMas = () => {
   const { id } = useParams();
